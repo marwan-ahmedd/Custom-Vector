@@ -16,7 +16,13 @@ class MAVector
         MAVector(int cap = 2);
         MAVector(const MAVector& other);
         MAVector &operator= (const MAVector& other);
-        T& operator[] (int index);
+        T& operator[] (int index){
+            if(index > sze-1){
+                cout << "An error has occured, index out of range." << endl;
+                exit(-1);
+            }
+            return arr[index];
+        }
         T pop_back();
         void erase(/*iterator1, iterator2*/);
         void insert(/*iterator, T*/);
