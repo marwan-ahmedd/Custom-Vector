@@ -20,8 +20,8 @@ public:
     MAVector &operator=(const MAVector<T> &other);
     T &operator[](int index);
     T pop_back();
-//    void erase(iterator itr1, iterator itr2);
-//    void insert(iterator itr, T item);
+    void erase(iterator itr1, iterator itr2);
+    void insert(iterator position, T item);
     iterator end();
     bool operator<(const MAVector<T> &other);
     int capacity() const;
@@ -35,7 +35,7 @@ public:
     void push_back(T item);
     //        void erase();
     void clear();
-    //        iterator begin();
+    iterator begin();
     bool operator==(const MAVector<T> &other);
     int size();
     void resize(int num);
@@ -113,16 +113,39 @@ T MAVector<T> :: pop_back()
     return lastElement;
 }
 //---------------------------------->
-// template <class T>
-// void MAVector<T> ::erase(iterator itr1, iterator itr2) {}
+template <class T>
+void MAVector<T> ::erase(iterator itr1, iterator itr2) {
+
+}
 //---------------------------------->
-// template <class T>
-// void MAVector<T> ::insert(iterator itr, T item) {}
+template <class T>
+void MAVector<T> ::insert(iterator position, T item) {
+    int *newArr = new int[sze+1];
+    int* tmp = newArr;
+
+    for (iterator i = arr; i != position; i++) {
+        *tmp = *i;
+        tmp++;
+    }
+    *tmp++ = item;
+    for (iterator i = position; i != arr+sze; i++) {
+        *tmp = *i;
+        tmp++;
+    }
+    delete[] arr;
+    arr = newArr;
+    newArr = nullptr;
+    tmp = nullptr;
+
+    sze++;
+    if (sze > cap)
+        cap *= 2;
+}
 //---------------------------------->
 template <class T>
 T* MAVector<T>::end()
 {
-    return T(arr + sze);
+    return arr+sze;
 }
 //---------------------------------->
 template <class T>
@@ -210,6 +233,11 @@ void MAVector<T>::clear()
     newArr = nullptr;
 }
 ///////////////////////////////////////////////
+template <class T>
+T* MAVector<T> :: begin() {
+    return arr;
+}
+////////////////////////////////////////////
 template <class T>
 bool MAVector<T>::operator==(const MAVector<T> &other)
 {
