@@ -1,5 +1,5 @@
-#ifndef _HEADER_H
-#define _HEADER_H
+#ifndef _MAVECTOR_H
+#define _MAVECTOR_H
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -7,25 +7,25 @@ using namespace std;
 template <class T>
 class MAVector
 {
-    private:
-        T *arr;
-        int sze;
-        int cap;
-        typedef T* iterator;
+private:
+    T *arr;
+    int sze;
+    int cap;
+    typedef T* iterator;
 
-    public:
-        // ----> Marwan
-        MAVector(int cap = 0);
-        MAVector(const MAVector &other);
-        MAVector &operator=(const MAVector<T> &other);
-        T &operator[](int index);
-        T pop_back();
-    //    void erase(iterator itr1, iterator itr2);
-    //    void insert(iterator itr, T item);
-        iterator end();
-        bool operator<(const MAVector<T> &other);
-        int capacity() const;
-        bool empty();
+public:
+    // ----> Marwan
+    MAVector(int cap = 0);
+    MAVector(const MAVector &other);
+    MAVector &operator=(const MAVector<T> &other);
+    T &operator[](int index);
+    T pop_back();
+//    void erase(iterator itr1, iterator itr2);
+//    void insert(iterator itr, T item);
+    iterator end();
+    bool operator<(const MAVector<T> &other);
+    int capacity() const;
+    bool empty();
 
     /////////////////////////////////////////////////////////////////////////
     // ----> Abo bakr
@@ -51,9 +51,11 @@ class MAVector
 
 // -> Marwan ///////////////////////////////////////////////////////////////////////
 template <class T>
-MAVector<T>::MAVector(int cap) : cap(cap), sze(0)
+MAVector<T>::MAVector(int cap) : cap(cap), sze(cap)
 {
     arr = new T[cap];
+    for (int i = 0; i < cap; i++)
+        arr[i] = 0;
 }
 //---------------------------------->
 template <class T>
