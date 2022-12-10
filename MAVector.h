@@ -29,15 +29,15 @@ public:
 
     /////////////////////////////////////////////////////////////////////////
     // ----> Abo bakr
-    MAVector(iterator other, int n);
+    MAVector(T* other, int n);
     ~MAVector();
     MAVector &operator=(const MAVector<T> &&other);
     void push_back(T item);
-    //        void erase();
+    void erase(T* it);
     void clear();
     iterator begin();
     bool operator==(const MAVector<T> &other);
-    int size();
+    int size() const;
     void resize(int num);
     friend ostream &operator<<(ostream &out, MAVector<T> &other)
     {
@@ -205,8 +205,8 @@ void MAVector<T>::push_back(T item)
     }
     else
     {
-        T *newArr = new T[cap + 5];
-        cap += 5;
+        T *newArr = new T[cap*5];
+        cap *= 5;
 
         for (int i = 0; i < sze; i++)
         {
@@ -220,7 +220,28 @@ void MAVector<T>::push_back(T item)
     }
 }
 ///////////////////////////////////////////////
-// void MAVector<T>::erase(){}
+template<class T>
+void MAVector<T>::erase(T* it)
+{
+    bool flag{false};
+    int ind;
+    for (int i = 0; i < size(); ++i){
+        if (it == &arr[i]){
+            flag = true;
+            ind = i;
+            --sze;
+            break;
+        }
+        else
+            flag = false;
+    }
+    if (flag){
+        for (int j = ind+1; j < size(); ++j)
+            arr[j-1] = arr[j];
+        arr[size()-1] = '\0';
+    }
+    else throw invalid_argument("Error. Iterator Invalid!\n");
+}
 ///////////////////////////////////////////////
 template <class T>
 void MAVector<T>::clear()
@@ -234,7 +255,7 @@ void MAVector<T>::clear()
 }
 ///////////////////////////////////////////////
 template <class T>
-T* MAVector<T> :: begin() {
+T* MAVector<T>::begin(){
     return arr;
 }
 ////////////////////////////////////////////
@@ -256,7 +277,7 @@ bool MAVector<T>::operator==(const MAVector<T> &other)
 }
 ///////////////////////////////////////////////
 template <class T>
-int MAVector<T>::size()
+int MAVector<T>::size() const
 {
     return sze;
 }
@@ -265,7 +286,7 @@ template <class T>
 void MAVector<T>::resize(int num)
 {
     if (num > cap)
-        cap += (num + 5);
+        cap *= 2;
 
     T* newArr = new T[cap];
 
