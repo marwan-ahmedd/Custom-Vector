@@ -124,7 +124,7 @@ void MAVector<T> ::erase(iterator itr1, iterator itr2) {
             toRemove++;
         }
 
-        T* newArr = new T[sze-toRemove];
+        T* newArr = new T[cap];
         T* ptr = newArr;
 
         for (T* item = arr; item != itr1; item++) {
@@ -149,7 +149,9 @@ void MAVector<T> ::erase(iterator itr1, iterator itr2) {
 //---------------------------------->
 template <class T>
 void MAVector<T> ::insert(iterator position, T item) {
-    int *newArr = new int[sze+1];
+    if (sze+1 > cap)
+        cap *= 2;
+    int *newArr = new int[cap];
     int* tmp = newArr;
 
     for (iterator i = arr; i != position; i++) {
