@@ -115,12 +115,43 @@ T MAVector<T> :: pop_back()
 //---------------------------------->
 template <class T>
 void MAVector<T> ::erase(iterator itr1, iterator itr2) {
+    if (itr1 <= itr2)
+    {
+        int toRemove = 0;
+        iterator tmp = itr1;
+        while (tmp++ != itr2)
+        {
+            toRemove++;
+        }
 
+        T* newArr = new T[cap];
+        T* ptr = newArr;
+
+        for (T* item = arr; item != itr1; item++) {
+            *ptr = *item;
+            ptr++;
+        }
+        for (T* item = itr2; item != arr+sze; item++) {
+            *ptr = *item;
+            ptr++;
+        }
+        sze -= toRemove;
+        if (cap / 2 == sze)
+            cap /= 2;
+
+        delete[] arr;
+        arr = newArr;
+        newArr = nullptr;
+        tmp = nullptr;
+        ptr = nullptr;
+    }
 }
 //---------------------------------->
 template <class T>
 void MAVector<T> ::insert(iterator position, T item) {
-    int *newArr = new int[sze+1];
+    if (sze+1 > cap)
+        cap *= 2;
+    int *newArr = new int[cap];
     int* tmp = newArr;
 
     for (iterator i = arr; i != position; i++) {
