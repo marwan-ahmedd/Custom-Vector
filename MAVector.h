@@ -224,9 +224,22 @@ MAVector<T>::~MAVector()
     delete[] arr;
 }
 ///////////////////////////////////////////////
-// template <class T>
-// MAVector MAVector::&operator= (const MAVector&& other){}
-///////////////////////////////////////////////
+template <class T>
+MAVector<T>& MAVector<T>::operator= (const MAVector&& other){
+    T* emptyPtr = nullptr;
+    if (this != &other){
+        delete[] arr;
+
+        arr = other.arr;
+        cap = other.cap;
+        sze = other.sze;
+
+        other.arr = emptyPtr;
+        cap = 0, sze = 0;
+
+        return *this;
+    }
+}///////////////////////////////////////////////
 template <class T>
 void MAVector<T>::push_back(T item)
 {
