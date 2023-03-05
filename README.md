@@ -4,33 +4,3 @@
   <p>This repository provides an implementation of a dynamic array that includes features such as adding, removing, and accessing elements, resizing the array, and retrieving the size of the array. The code is designed to be easily understandable and modifiable, making it a useful resource for anyone looking to learn about dynamic arrays or modify the implementation for their own use.</p>
   <p>In addition to the source code, the repository includes documentation such as a README file that provides an overview of the project and instructions for running and modifying the code. The repository may also include other resources such as tests, examples, and contributions from other developers.</p>
 </div>
-
-<style>
-  /* CSS code for formatting the description */
-  .description {
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    color: #333;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .description h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  .description p {
-    margin-bottom: 10px;
-  }
-
-  .description a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-
-  .description a:hover {
-    text-decoration: underline;
-  }
-</style>
